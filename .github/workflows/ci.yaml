@@ -1,0 +1,45 @@
+name: ShopStack CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  helm-and-backend-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: checkout repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: install Helm
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      # Step 3: lint Helm chart
+      - name: Helm lint
+        run: helm lint ./helm/shopstack
+
+      # Step 4: render Helm chart with dev values
+      - name: Helm template render
+        run: helm template shopstack-dev ./helm/shopstack -f ./helm/shopstack/values-dev.yaml > rendered-dev.yaml
+
+      # Step 5: set up Python for backend validation
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Step 6: install backend dependencies
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r app/backend/requirements.txt
+
+      # Step 7: basic backend syntax validation
+      - name: Validate backend module syntax
+        run: |
+          python -m py_compile app/backend/main.py
