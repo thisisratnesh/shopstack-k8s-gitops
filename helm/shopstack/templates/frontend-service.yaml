@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.frontend.service.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "shopstack.commonLabels" . | nindent 4 }}
+spec:
+  selector:
+    {{- include "shopstack.frontendSelectorLabels" . | nindent 4 }}
+  ports:
+    - port: {{ .Values.frontend.service.port }}
+      targetPort: {{ .Values.frontend.service.targetPort }}

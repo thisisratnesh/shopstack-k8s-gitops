@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopstack-frontend
+  namespace: shopstack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopstack-frontend
+  template:
+    metadata:
+      labels:
+        app: shopstack-frontend
+    spec:
+      containers:
+        - name: shopstack-frontend
+          image: shopstack-frontend:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80

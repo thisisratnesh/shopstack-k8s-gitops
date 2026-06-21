@@ -1,0 +1,112 @@
+/* --------------------------------------------------------------- */
+/* General page layout */
+/* --------------------------------------------------------------- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f6fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #555;
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+/* --------------------------------------------------------------- */
+/* Section cards */
+/* --------------------------------------------------------------- */
+.create-product-section,
+.products-section {
+    margin-bottom: 28px;
+    padding: 20px;
+    border: 1px solid #e2e6ef;
+    border-radius: 10px;
+    background-color: #fafbff;
+}
+
+/* --------------------------------------------------------------- */
+/* Form styling */
+/* --------------------------------------------------------------- */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.form-row label {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.form-row input {
+    padding: 10px;
+    border: 1px solid #cfd6e4;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* --------------------------------------------------------------- */
+/* Buttons */
+/* --------------------------------------------------------------- */
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* --------------------------------------------------------------- */
+/* Status box */
+/* --------------------------------------------------------------- */
+.status-box {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 12px;
+    background-color: #eef3ff;
+    border: 1px solid #d8e2ff;
+    border-radius: 8px;
+    color: #333;
+}
+
+/* --------------------------------------------------------------- */
+/* Product list */
+/* --------------------------------------------------------------- */
+.products-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.product-card {
+    padding: 14px;
+    margin-bottom: 12px;
+    border: 1px solid #dfe5f2;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+.product-name {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.product-price {
+    color: #444;
+}

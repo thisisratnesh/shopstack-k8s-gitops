@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shopstack-backend-config
+  namespace: shopstack
+data:
+  APP_ENV: "dev"
+  LOG_LEVEL: "INFO"
+
+  DB_HOST: "shopstack-postgres-service"
+  DB_PORT: "5432"
+  DB_NAME: "shopstack"
+  DB_USER: "shopstack_user"
+
+  REDIS_HOST: "shopstack-redis-service"
+  REDIS_PORT: "6379"

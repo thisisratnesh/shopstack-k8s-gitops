@@ -1,0 +1,48 @@
+config:
+  APP_ENV: dev
+  LOG_LEVEL: DEBUG
+
+frontend:
+  replicas: 1
+  imagePullPolicy: Never
+  resources:
+    requests:
+      cpu: "50m"
+      memory: "64Mi"
+    limits:
+      cpu: "150m"
+      memory: "128Mi"
+
+backend:
+  replicas: 1
+  imagePullPolicy: Never
+  resources:
+    requests:
+      cpu: "50m"
+      memory: "64Mi"
+    limits:
+      cpu: "200m"
+      memory: "128Mi"
+
+postgres:
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "300m"
+      memory: "256Mi"
+
+redis:
+  replicas: 1
+  imagePullPolicy: IfNotPresent
+  resources:
+    requests:
+      cpu: "25m"
+      memory: "32Mi"
+    limits:
+      cpu: "100m"
+      memory: "64Mi"
+
+ingress:
+  enabled: false

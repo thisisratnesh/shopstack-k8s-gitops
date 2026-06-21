@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopstack-backend
+  namespace: shopstack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopstack-backend
+  template:
+    metadata:
+      labels:
+        app: shopstack-backend
+    spec:
+      containers:
+        - name: shopstack-backend
+          image: shopstack-backend:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: shopstack-backend-config
+            - secretRef:
+                name: shopstack-backend-secret

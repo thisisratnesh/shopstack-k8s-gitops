@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopStack Frontend</title>
+
+    <!-- Link frontend stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main application container -->
+    <div class="container">
+        <h1>ShopStack</h1>
+        <p class="subtitle">Frontend + FastAPI + PostgreSQL + Kubernetes</p>
+
+        <!-- --------------------------------------------------------- -->
+        <!-- Product creation form section -->
+        <!-- --------------------------------------------------------- -->
+        <div class="create-product-section">
+            <h2>Create Product</h2>
+
+            <div class="form-row">
+                <label for="product-name-input">Product Name</label>
+                <input
+                    id="product-name-input"
+                    type="text"
+                    placeholder="Enter product name"
+                >
+            </div>
+
+            <div class="form-row">
+                <label for="product-price-input">Price</label>
+                <input
+                    id="product-price-input"
+                    type="number"
+                    placeholder="Enter price"
+                >
+            </div>
+
+            <button id="create-product-button">Create Product</button>
+        </div>
+
+        <!-- --------------------------------------------------------- -->
+        <!-- Product listing section -->
+        <!-- --------------------------------------------------------- -->
+        <div class="products-section">
+            <h2>Products</h2>
+
+            <button id="load-products-button">Load Products</button>
+
+            <div id="status-box" class="status-box">
+                Click "Load Products" to fetch data from backend.
+            </div>
+
+            <ul id="products-list" class="products-list"></ul>
+        </div>
+    </div>
+
+    <!-- Frontend JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.postgres.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "shopstack.commonLabels" . | nindent 4 }}
+spec:
+  serviceName: {{ .Values.postgres.service.name }}
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "shopstack.postgresSelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "shopstack.commonLabels" . | nindent 8 }}
+        {{- include "shopstack.postgresSelectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Values.postgres.name }}
+          image: {{ .Values.postgres.image }}
+          ports:
+            - containerPort: {{ .Values.postgres.containerPort }}
+          envFrom:
+            - secretRef:
+                name: shopstack-postgres-secret
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+          resources:
+            {{- toYaml .Values.postgres.resources | nindent 12 }}
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.postgres.pvc.name }}

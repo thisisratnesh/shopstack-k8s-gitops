@@ -1,0 +1,114 @@
+namespace: shopstack-helm
+
+frontend:
+  name: shopstack-frontend
+  image: shopstack-frontend:v1
+  imagePullPolicy: Never
+  replicas: 1
+  containerPort: 80
+  service:
+    name: shopstack-frontend-service
+    port: 80
+    targetPort: 80
+  readinessProbe:
+    path: /
+    initialDelaySeconds: 5
+    periodSeconds: 10
+  livenessProbe:
+    path: /
+    initialDelaySeconds: 15
+    periodSeconds: 20
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "250m"
+      memory: "256Mi"
+
+backend:
+  name: shopstack-backend
+  image: shopstack-backend:v1
+  imagePullPolicy: Never
+  replicas: 1
+  containerPort: 8000
+  service:
+    name: shopstack-backend-service
+    port: 8000
+    targetPort: 8000
+  readinessProbe:
+    path: /api/health
+    initialDelaySeconds: 5
+    periodSeconds: 10
+  livenessProbe:
+    path: /api/health
+    initialDelaySeconds: 15
+    periodSeconds: 20
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "300m"
+      memory: "256Mi"
+
+config:
+  APP_ENV: dev
+  LOG_LEVEL: INFO
+  DB_HOST: shopstack-postgres-service
+  DB_PORT: "5432"
+  DB_NAME: shopstack
+  DB_USER: shopstack_user
+  REDIS_HOST: shopstack-redis-service
+  REDIS_PORT: "6379"
+
+secret:
+  DB_PASSWORD: shopstack_dev_password
+
+postgres:
+  name: shopstack-postgres
+  image: postgres:15
+  containerPort: 5432
+  service:
+    name: shopstack-postgres-service
+    port: 5432
+    targetPort: 5432
+  database: shopstack
+  user: shopstack_user
+  password: shopstack_dev_password
+  pvc:
+    name: shopstack-postgres-pvc
+    size: 2Gi
+    accessMode: ReadWriteOnce
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+
+redis:
+  name: shopstack-redis
+  image: redis:7
+  imagePullPolicy: IfNotPresent
+  replicas: 1
+  containerPort: 6379
+  service:
+    name: shopstack-redis-service
+    port: 6379
+    targetPort: 6379
+  resources:
+    requests:
+      cpu: "50m"
+      memory: "64Mi"
+    limits:
+      cpu: "200m"
+      memory: "128Mi"
+
+ingress:
+  enabled: false
+  name: shopstack-ingress
+  className: nginx
+  frontendPath: /
+  backendPath: /api
