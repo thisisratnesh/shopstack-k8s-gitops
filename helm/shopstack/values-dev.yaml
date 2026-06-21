@@ -14,7 +14,7 @@ frontend:
       memory: "128Mi"
 
 backend:
-  replicas: 1
+  replicas: 2
   imagePullPolicy: Never
   resources:
     requests:
