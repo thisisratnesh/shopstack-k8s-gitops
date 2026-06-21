@@ -1,6 +1,6 @@
 config:
   APP_ENV: dev
-  LOG_LEVEL: DEBUG
+  LOG_LEVEL: WARNING
 
 frontend:
   replicas: 1
