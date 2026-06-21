@@ -63,7 +63,7 @@ config:
   REDIS_PORT: "6379"
 
 secret:
-  DB_PASSWORD: shopstack_dev_password
+  DB_PASSWORD: change_me_password
 
 postgres:
   name: shopstack-postgres
